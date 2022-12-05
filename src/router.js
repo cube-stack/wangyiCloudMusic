@@ -17,6 +17,7 @@ export default new Router({
         {
           path: 'discover',
           name: 'discover',
+          redirect: { name: 'proposal' },
           component: () => import('@/views/discover/index.vue'),
           children: [
             {
@@ -25,6 +26,11 @@ export default new Router({
               component: () => import('@/views/discover/proposal/index.vue'),
             }
           ]
+        },
+        {
+          path: 'playlist',
+          name: 'playlist',
+          component: () => import('@/views/playlist/index.vue')
         },
         {
           path: 'myMusic',
