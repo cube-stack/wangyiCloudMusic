@@ -2,7 +2,7 @@
   <li class="playlist">
     <div class="cover">
       <img class="cover-img" :src="playListDetail.coverImgUrl" alt="" />
-      <a :href="`playlist?id=${playListDetail.id}`" class="cover-msk"></a>
+      <a :href="`/playlist?id=${playListDetail.id}`" class="cover-msk"></a>
       <div class="cover-bottom">
         <a href="javascript:;" class="cover-bottom-play play"
           ><i class="el-icon-video-play"></i
@@ -12,7 +12,7 @@
       </div>
     </div>
     <p>
-      <a class="cover-dec" :href="`playlist?id=${playListDetail.id}`">{{
+      <a class="cover-dec" :href="`/playlist?id=${playListDetail.id}`">{{
         playListDetail.name
       }}</a>
     </p>

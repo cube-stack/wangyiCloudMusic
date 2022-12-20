@@ -1,8 +1,39 @@
-.mainContent {
-  padding: 15px 10px 30px 10px;
-  width: 729px;
-  box-sizing: border-box;
+@import url(./table.scss);
+.clearfix::after {
+  content: "";
+  display: block;
+  clear: both;
 }
-.contentAside {
-  width: 262px;
+.left {
+  float: left;
+}
+.right {
+  float: right;
+}
+.article {
+  margin: 0 auto;
+  width: 64.6%;
+  .mainContent {
+    padding: 15px 10px 30px 10px;
+    width: 729px;
+    box-sizing: border-box;
+  }
+  .contentAside {
+    width: 262px;
+  }
+}
+.msk {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: url(../imgs/coverall.png);
+}
+.icon {
+  background: url(../imgs/icon.png);
+}
+.button2 {
+  background: url(../imgs/button2.png);
+}
+.table {
+  background: url(../imgs/table.png);
 }

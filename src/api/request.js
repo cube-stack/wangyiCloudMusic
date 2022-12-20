@@ -26,3 +26,23 @@ export const getHotPlaylist = (params) =>
     url: "http://localhost:8080/api/top/playlist",
     params,
   });
+
+/**
+ * 获取歌单详情
+ */
+export const getPlaylistDetail = (params) =>
+  axios({
+    method: "get",
+    url: "http://localhost:8080/api/playlist/detail",
+    params,
+  });
+
+/**
+ * 获取音乐URL
+ */
+export const getSongUrlV1 = (params) =>
+  axios({
+    method: "get",
+    url: "http://localhost:8080/api/song/url/v1",
+    params,
+  });

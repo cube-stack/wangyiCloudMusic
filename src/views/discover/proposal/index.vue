@@ -74,7 +74,7 @@ export default {
   display: flex;
   justify-content: center;
   margin: 0 auto;
-  width: 64.6%;
+  width: 1199px;
   .mainContent {
     padding: 15px 10px 30px 10px;
     width: 729px;

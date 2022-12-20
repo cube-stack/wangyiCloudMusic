@@ -2,15 +2,35 @@
   <div class="home">
     <header-tab></header-tab>
     <router-view></router-view>
+    <audio
+      class="play"
+      controls
+      style="width: 100%"
+      :src="url()"
+      autoplay
+    ></audio>
   </div>
 </template>
 
 <script>
-import HeaderTab from '@/components/HeaderTab/HeaderTab.vue'
+import { mapState } from "vuex";
+import HeaderTab from "@/components/HeaderTab/HeaderTab.vue";
 export default {
-  name: 'home',
+  name: "home",
   components: {
-    HeaderTab
+    HeaderTab,
   },
-}
+  data() {
+    return {
+      ...mapState("currentSong", { url: "url" }),
+    };
+  },
+  methods: {},
+};
 </script>
+<style lang="scss" scoped>
+.play {
+  position: fixed;
+  bottom: 0;
+}
+</style>
