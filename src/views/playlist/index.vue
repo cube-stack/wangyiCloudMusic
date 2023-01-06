@@ -5,7 +5,10 @@
       <songsList
         :songList="playlistDetail.tracks || []"
         :tableHeader="tableHeader"
+        :playCount="playlistDetail.playCount"
+        class="songs-list"
       ></songsList>
+      <comment :id="id" :type="2"></comment>
     </div>
     <div class="contentAside"></div>
   </div>
@@ -14,12 +17,14 @@
 <script>
 import playlistDetail from "@/views/playlist/components/playlistDetail.vue";
 import songsList from "@/components/songsList/index.vue";
+import comment from "@/components/comment/index.vue";
 import { getPlaylistDetail } from "@/api/request.js";
 export default {
   name: "playlist",
   components: {
     playlistDetail,
     songsList,
+    comment,
   },
   data() {
     return {
@@ -45,4 +50,10 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.article {
+  .songs-list {
+    margin-bottom: 40px;
+  }
+}
+</style>

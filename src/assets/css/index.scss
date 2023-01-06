@@ -1,4 +1,6 @@
+@import url(./reset.scss);
 @import url(./table.scss);
+@import url(./user.scss);
 .clearfix::after {
   content: "";
   display: block;
@@ -10,15 +12,32 @@
 .right {
   float: right;
 }
+a {
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+i {
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+}
 .article {
+  display: flex;
+  justify-content: center;
   margin: 0 auto;
-  width: 64.6%;
+  width: 982px;
+  box-sizing: border-box;
   .mainContent {
-    padding: 15px 10px 30px 10px;
+    padding: 15px 20px 30px 20px;
+    border-left: 1px solid #d3d3d3;
+    border-right: 1px solid #d3d3d3;
     width: 729px;
     box-sizing: border-box;
   }
   .contentAside {
+    border-right: 1px solid #d3d3d3;
     width: 262px;
   }
 }
@@ -28,12 +47,32 @@
   left: 0;
   background: url(../imgs/coverall.png);
 }
+
 .icon {
   background: url(../imgs/icon.png);
+  cursor: pointer;
+}
+.icon1 {
+  background: url(../imgs/icon1.png);
+  cursor: pointer;
+}
+.icon2 {
+  background: url(../imgs/icon2.png);
+  cursor: pointer;
+}
+.iconall {
+  background: url(../imgs/iconall.png);
+  cursor: pointer;
+}
+.button {
+  background: url(../imgs/button.png);
+  cursor: pointer;
 }
 .button2 {
   background: url(../imgs/button2.png);
+  cursor: pointer;
 }
 .table {
   background: url(../imgs/table.png);
+  cursor: pointer;
 }

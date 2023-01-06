@@ -29,8 +29,11 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.play {
-  position: fixed;
-  bottom: 0;
+.home {
+  margin-bottom: 54px;
+  .play {
+    position: fixed;
+    bottom: 0;
+  }
 }
 </style>

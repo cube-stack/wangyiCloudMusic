@@ -1,11 +1,25 @@
 <template>
-  <div class="background" ref="bakground">
-    <div class="content">
-      <div class="cover" ref="cover"></div>
-      <div class="download"></div>
-      <i class="left" @click="prePage"></i>
-      <i class="right" @click="nextPage"></i>
-    </div>
+  <div class="coverBox">
+    <ul class="covers clearfix" ref="covers">
+      <li class="cover" v-for="(item, index) in backgroundUrl" :key="index">
+        <div
+          class="o-cover"
+          :style="{ backgroundImage: 'url(' + item + '?imageView&blur=40x20)' }"
+        >
+          <div class="content">
+            <div
+              class="i-cover"
+              :style="{
+                backgroundImage: 'url(' + item + '?imageView&quality=89)',
+              }"
+            ></div>
+            <div class="download"></div>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <i class="left" @click="prePage"></i>
+    <i class="right" @click="nextPage"></i>
   </div>
 </template>
 
@@ -21,101 +35,109 @@ export default {
         "http://p1.music.126.net/N8EXz4YPp2s64imMNCVSNA==/109951168013969500.jpg",
         "http://p1.music.126.net/pYCMqM4eI3cKmuEbcSBiAg==/109951168013961776.jpg",
       ],
-      photoNo: 1,
+      currentCover: 0,
+      timer: null,
     };
   },
   methods: {
     nextPage() {
+      this.handleChange();
       clearInterval(this.timer);
-      this.photoNo++;
-      this.change();
-      this.changeBackground();
+      this.changeCover();
     },
     prePage() {
+      this.currentCover = this.currentCover - 2;
+      if (this.currentCover < 0) {
+        this.currentCover = 3;
+      }
+      this.handleChange();
       clearInterval(this.timer);
-      this.photoNo = this.photoNo - 2;
-      this.change();
-      this.changeBackground();
+      this.changeCover();
     },
-    change() {
-      this.$refs.cover.style.opacity = 1;
-      this.$refs.cover.style.backgroundImage = `url(${
-        this.backgroundUrl[this.photoNo]
-      }?imageView&quality=89)`;
-      this.$refs.bakground.style.backgroundImage = `url(${
-        this.backgroundUrl[this.photoNo]
-      }?imageView&blur=40x20)`;
-      this.photoNo++;
+    handleChange() {
+      const covers = this.$refs.covers;
+      this.currentCover++;
+      if (this.currentCover > 4) this.currentCover = 0;
+      if (covers && covers.style)
+        covers.style.left = `-${this.currentCover * 1903}px`;
     },
-    changeBackground() {
-      this.timer = setInterval(() => {
-        if (this.photoNo > 3) {
-          this.photoNo = 0;
-        } else if (this.photoNo < 0) {
-          this.photoNo = this.backgroundUrl.length - 1;
-        }
-        this.$refs.cover.style.opacity = this.$refs.cover.style.opacity - 0.05;
-        if (
-          !this.$refs.cover.style.opacity ||
-          this.$refs.cover.style.opacity < 0
-        ) {
-          this.change();
-        }
-      }, 100);
+    changeCover() {
+      clearInterval(this.timer);
+      this.timer = setInterval(this.handleChange, 5000);
     },
   },
   mounted() {
-    this.changeBackground();
+    this.changeCover();
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.background {
+.coverBox {
+  position: relative;
+  margin: 0 auto;
+  width: 1903px;
   height: 285px;
-
-  .content {
-    height: 285px;
+  overflow: hidden;
+  .covers {
     display: flex;
-    justify-content: center;
-    position: relative;
+    position: absolute;
+    transition: 0.5s;
+    top: 0;
+    left: 0;
+    padding: 0;
+    margin: 0;
     .cover {
-      background-size: 720px;
-      width: 720px;
+      flex-shrink: 0;
+      list-style: none;
+    }
+    .o-cover {
+      width: 1903px;
       height: 285px;
-      cursor: pointer;
-    }
-
-    .download {
-      width: 262px;
-      height: 285px;
-      background: url("../../assets/imgs/download.png");
-    }
-    .left,
-    .right {
-      position: absolute;
-      width: 37px;
-      height: 63px;
-      background: url("../../assets/imgs/banner.png");
-      cursor: pointer;
-    }
-    .left {
-      top: 50%;
-      left: 0;
-      transform: translate(550%, -50%);
-      background-position: 0 298px;
-      &:hover {
-        background-position: 0 228px;
+      .content {
+        position: relative;
+        margin: 0 auto;
+        width: 982px;
+        .i-cover {
+          background-size: 720px;
+          width: 720px;
+          height: 285px;
+          cursor: pointer;
+        }
+        .download {
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 262px;
+          height: 285px;
+          background: url("../../assets/imgs/download.png");
+        }
       }
     }
-    .right {
-      top: 50%;
-      right: 0;
-      transform: translate(-550%, -50%);
-      background-position: 0 147px;
-      &:hover {
-        background-position: 0 77px;
-      }
+  }
+  .left,
+  .right {
+    position: absolute;
+    top: 50%;
+    width: 37px;
+    height: 63px;
+    background: url("../../assets/imgs/banner.png");
+    cursor: pointer;
+  }
+  .left {
+    left: 0;
+    transform: translate(800%, -50%);
+    background-position: 0 298px;
+    &:hover {
+      background-position: 0 228px;
+    }
+  }
+  .right {
+    right: 0;
+    transform: translate(-800%, -50%);
+    background-position: 0 147px;
+    &:hover {
+      background-position: 0 77px;
     }
   }
 }

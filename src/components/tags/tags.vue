@@ -30,7 +30,9 @@ export default {
 .tags {
   margin-bottom: 10px;
   line-height: 22px;
+  //清除浮动
   overflow: hidden;
+
   .tag {
     padding-right: 10px;
     margin-right: 10px;

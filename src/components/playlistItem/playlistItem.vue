@@ -2,19 +2,19 @@
   <li class="playlist">
     <div class="cover">
       <img class="cover-img" :src="playListDetail.coverImgUrl" alt="" />
-      <a :href="`/playlist?id=${playListDetail.id}`" class="cover-msk"></a>
+      <a @click="handleJump" class="cover-msk"></a>
       <div class="cover-bottom">
         <a href="javascript:;" class="cover-bottom-play play"
           ><i class="el-icon-video-play"></i
         ></a>
         <span class="el-icon-headset"></span>
-        <span>{{ playListDetail.trackCount }}</span>
+        <span class="playCount">{{
+          playListDetail.playCount | playCount
+        }}</span>
       </div>
     </div>
     <p>
-      <a class="cover-dec" :href="`/playlist?id=${playListDetail.id}`">{{
-        playListDetail.name
-      }}</a>
+      <a class="cover-dec" @click="handleJump">{{ playListDetail.name }}</a>
     </p>
   </li>
 </template>
@@ -26,6 +26,25 @@ export default {
     playListDetail: {
       type: Object,
       defaule: () => {},
+    },
+  },
+  methods: {
+    handleJump() {
+      this.$router.push({
+        name: "playlist",
+        query: {
+          id: this.playListDetail.id || "",
+        },
+      });
+    },
+  },
+  filters: {
+    playCount(playCount) {
+      if (playCount > 9999) {
+        playCount = playCount.toString();
+        playCount = playCount.substring(0, playCount.length - 4) + "万";
+      }
+      return playCount;
     },
   },
 };
@@ -51,6 +70,7 @@ export default {
       display: block;
       width: 100%;
       height: 140px;
+      cursor: pointer;
     }
     &-bottom {
       position: absolute;
@@ -69,6 +89,10 @@ export default {
         right: 0px;
         color: #ffffff;
         font-size: 20px;
+      }
+      .playCount {
+        padding-left: 3px;
+        font-size: 12px;
       }
     }
     &-dec {

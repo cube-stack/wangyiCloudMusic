@@ -1,7 +1,11 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
+const originalPush = Router.prototype.push;
 
+Router.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch((err) => err);
+};
 Vue.use(Router);
 
 export default new Router({
@@ -24,6 +28,11 @@ export default new Router({
               path: "proposal",
               name: "proposal",
               component: () => import("@/views/discover/proposal/index.vue"),
+            },
+            {
+              path: "playlists",
+              name: "playlists",
+              component: () => import("@/views/discover/playlist/index.vue"),
             },
           ],
         },
@@ -56,6 +65,11 @@ export default new Router({
           path: "download",
           name: "download",
           component: () => import("@/views/download/index.vue"),
+        },
+        {
+          path: "song",
+          name: "song",
+          component: () => import("@/views/song/index.vue"),
         },
       ],
     },

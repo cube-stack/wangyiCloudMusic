@@ -22,7 +22,9 @@
             <img class="cover" :src="creator.avatarUrl" alt="" />
             <span class="aut">
               <a href="">{{ creator.nickname }}</a>
-              <span class="date" style="color: #999"> 2020-09-18 创建</span>
+              <span class="date" style="color: #999; padding-left: 10px">
+                2020-09-18 创建</span
+              >
             </span>
           </div>
           <tags :tags="creator.expertTags"> </tags>

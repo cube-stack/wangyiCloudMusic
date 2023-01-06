@@ -12,17 +12,20 @@
               >热门推荐</a
             >
             <div class="tags">
-              <a href="" v-for="(item, index) in tags" :key="index"
+              <a
+                @click="handleClick(item.name)"
+                v-for="(item, index) in tags"
+                :key="index"
                 >{{ item.name
                 }}<span class="line" v-if="!(tags.length - 1 === index)"
                   >|</span
                 ></a
               >
             </div>
-            <span class="more">
-              <a href="">更多</a>
+            <div class="more">
+              <a @click="handleClick('全部')">更多</a>
               <i>-></i>
-            </span>
+            </div>
             <div class="under-line"></div>
           </div>
           <div class="playlists">
@@ -55,6 +58,11 @@ export default {
     Swiper,
     playlists,
   },
+  methods: {
+    handleClick(cat) {
+      this.$router.push({ name: "playlists", query: { cat } });
+    },
+  },
   created() {
     tags().then((res) => {
       this.tags = res.data.tags.slice(0, 5);
@@ -71,14 +79,7 @@ export default {
 
 <style lang="scss" scoped>
 .article {
-  display: flex;
-  justify-content: center;
-  margin: 0 auto;
-  width: 1199px;
   .mainContent {
-    padding: 15px 10px 30px 10px;
-    width: 729px;
-    box-sizing: border-box;
     a {
       color: #666666;
       text-decoration: none;
@@ -100,6 +101,7 @@ export default {
       }
 
       .more {
+        margin-top: 8px;
         float: right;
       }
 

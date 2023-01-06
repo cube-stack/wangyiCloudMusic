@@ -41,6 +41,9 @@ export default {
 <style lang="scss" scoped>
 .head {
   background: #242424;
+  margin: 0 auto;
+  max-width: 1903px;
+
   .content {
     width: 1485px;
     margin: 0 auto;
