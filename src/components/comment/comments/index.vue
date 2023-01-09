@@ -34,6 +34,7 @@ export default {
   margin-top: 60px;
   .title {
     height: 30px;
+    font-size: 16px;
     font-weight: 600;
     border-bottom: 1px solid #cfcfcf;
   }

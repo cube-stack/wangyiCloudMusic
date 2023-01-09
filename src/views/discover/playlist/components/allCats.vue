@@ -1,13 +1,15 @@
 <template>
   <div class="all-cats">
     <h1 class="h">
-      <a class="button"><i>全部风格</i></a>
+      <a class="button" @click="handleChooseCat"><i>全部风格</i></a>
     </h1>
-    <catsItem
-      v-for="(item, index) in catlist"
-      :key="index"
-      :catlist="item"
-    ></catsItem>
+    <ul>
+      <catsItem
+        v-for="(item, index) in catlist"
+        :key="index"
+        :catlist="item"
+      ></catsItem>
+    </ul>
     <i class="iconall"></i>
   </div>
 </template>
@@ -23,6 +25,11 @@ export default {
     catlist: {
       type: Array,
       default: () => [],
+    },
+  },
+  methods: {
+    handleChooseCat(cat) {
+      this.$router.push({ name: "playlists", query: { cat: "全部" } });
     },
   },
 };
@@ -42,6 +49,7 @@ export default {
   width: 600px;
   z-index: 999;
   .h {
+    padding-top: 5px;
     padding-bottom: 10px;
     border-bottom: 1px solid #d3d3d3;
     margin: 0;

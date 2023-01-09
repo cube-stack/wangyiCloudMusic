@@ -12,14 +12,15 @@
               :style="{
                 backgroundImage: 'url(' + item + '?imageView&quality=89)',
               }"
-            ></div>
+            >
+              <i class="left" @click="prePage"></i>
+              <i class="right" @click="nextPage"></i>
+            </div>
             <div class="download"></div>
           </div>
         </div>
       </li>
     </ul>
-    <i class="left" @click="prePage"></i>
-    <i class="right" @click="nextPage"></i>
   </div>
 </template>
 
@@ -47,7 +48,7 @@ export default {
     },
     prePage() {
       this.currentCover = this.currentCover - 2;
-      if (this.currentCover < 0) {
+      if (this.currentCover < -1) {
         this.currentCover = 3;
       }
       this.handleChange();
@@ -58,8 +59,9 @@ export default {
       const covers = this.$refs.covers;
       this.currentCover++;
       if (this.currentCover > 4) this.currentCover = 0;
-      if (covers && covers.style)
+      if (covers && covers.style) {
         covers.style.left = `-${this.currentCover * 1903}px`;
+      }
     },
     changeCover() {
       clearInterval(this.timer);
@@ -76,29 +78,31 @@ export default {
 .coverBox {
   position: relative;
   margin: 0 auto;
-  width: 1903px;
+  width: 100%;
   height: 285px;
   overflow: hidden;
   .covers {
-    display: flex;
     position: absolute;
     transition: 0.5s;
     top: 0;
     left: 0;
     padding: 0;
     margin: 0;
+    width: 500%;
     .cover {
-      flex-shrink: 0;
+      float: left;
       list-style: none;
+      width: 20%;
     }
     .o-cover {
-      width: 1903px;
+      width: 100%;
       height: 285px;
       .content {
         position: relative;
         margin: 0 auto;
         width: 982px;
         .i-cover {
+          position: relative;
           background-size: 720px;
           width: 720px;
           height: 285px;
@@ -125,7 +129,7 @@ export default {
     cursor: pointer;
   }
   .left {
-    left: 0;
+    left: -375px;
     transform: translate(800%, -50%);
     background-position: 0 298px;
     &:hover {
@@ -133,9 +137,10 @@ export default {
     }
   }
   .right {
-    right: 0;
+    right: -630px;
     transform: translate(-800%, -50%);
     background-position: 0 147px;
+    z-index: 99;
     &:hover {
       background-position: 0 77px;
     }

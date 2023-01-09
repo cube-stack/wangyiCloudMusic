@@ -41,8 +41,8 @@ export default {
     background-position: right -27px;
     text-decoration: none;
     i {
-      background-position: 0 0;
-      padding: 3px 0px;
+      background-position: 0 3px;
+      padding: 4px 0px;
       padding-left: 10px;
       height: 22px;
       line-height: 22px;
@@ -51,7 +51,7 @@ export default {
   .button2:hover {
     background-position: right -1430px;
     i {
-      background-position: 0 -1400px;
+      background-position: 0 -1397px;
     }
   }
 }

@@ -21,7 +21,12 @@
           <a class="hot-t">热门</a>
         </button>
         <!-- 分类弹窗 -->
-        <allCats class="cats" data-msk="false" :catlist="catlist"></allCats>
+        <allCats
+          class="cats"
+          data-msk="false"
+          :catlist="catlist"
+          v-if="dialogVisible"
+        ></allCats>
       </div>
     </div>
     <!-- 歌单集合 -->
@@ -81,6 +86,7 @@ export default {
         const { playlists, total } = res.data;
         this.playlists = playlists;
         this.total = total;
+        this.dialogVisible = false;
       });
     },
     handleChangePage(value) {
@@ -101,23 +107,26 @@ export default {
     },
     getHotCats() {
       getCatlist().then((res) => {
+        const result = [];
         const BKG_MAP = [
           { x: "-20px", y: "-735px" },
           { x: "0px", y: "-60px" },
           { x: "0px", y: "-88px" },
-          { x: "0px", y: "-177px" },
+          { x: "0px", y: "-117px" },
           { x: "0px", y: "-141px" },
         ];
         const { categories, sub } = res.data;
         Object.keys(categories).forEach((key, index) => {
-          this.catlist[index] = { name: categories[key], catlist: [] };
+          result[index] = {
+            name: categories[key],
+            catlist: [],
+            position: BKG_MAP[index],
+          };
         });
         sub.forEach((item) => {
-          this.catlist[item.category].catlist.push({
-            ...item,
-            position: BKG_MAP[item.category],
-          });
+          result[item.category].catlist.push(item);
         });
+        this.catlist = result;
       });
     },
   },

@@ -1,10 +1,14 @@
 <template>
   <li class="cats-item">
-    <div class="l"><i class="icon"></i>{{ catlist.name }}</div>
+    <div class="l">
+      <i class="icon" :style="getBKGPosition(catlist.position)"></i
+      >{{ catlist.name }}
+    </div>
     <div class="r">
       <ul>
         <li class="left" v-for="(item, index) in catlist.catlist" :key="index">
-          <a class="cat-t"> {{ item.name }}</a
+          <a class="cat-t" @click="handleChooseCat(item.name)">
+            {{ item.name }}</a
           ><span class="cat-t" style="padding: 0 10px">|</span>
         </li>
       </ul>
@@ -24,7 +28,14 @@ export default {
   data() {
     return {};
   },
-  created() {},
+  methods: {
+    getBKGPosition({ x = "0px", y = "0px" }) {
+      return { "background-position": `${x} ${y}` };
+    },
+    handleChooseCat(cat) {
+      this.$router.push({ name: "playlists", query: { cat } });
+    },
+  },
 };
 </script>
 

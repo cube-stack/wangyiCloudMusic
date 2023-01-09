@@ -12,7 +12,10 @@
 .right {
   float: right;
 }
+/* 重置文本格式元素 */
 a {
+  text-decoration: none;
+  color: #666;
   cursor: pointer;
   &:hover {
     text-decoration: underline;
