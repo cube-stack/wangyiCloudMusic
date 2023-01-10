@@ -10,6 +10,7 @@
         >
           <span>{{ item.name }}</span>
         </div>
+        <div @click="handleLogin">登录</div>
       </h2>
     </div>
   </div>
@@ -33,6 +34,9 @@ export default {
   methods: {
     handleJump(item) {
       this.$router.push({ name: item.pathName });
+    },
+    handleLogin() {
+      this.$emit("login");
     },
   },
 };

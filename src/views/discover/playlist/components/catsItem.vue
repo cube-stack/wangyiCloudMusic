@@ -33,7 +33,7 @@ export default {
       return { "background-position": `${x} ${y}` };
     },
     handleChooseCat(cat) {
-      this.$router.push({ name: "playlists", query: { cat } });
+      this.$router.push({ name: "playlists", query: { cat, key: Date.now() } });
     },
   },
 };

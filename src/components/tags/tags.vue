@@ -2,10 +2,10 @@
   <div class="tags">
     <span class="left">标签：</span>
     <a
-      href=""
       v-for="(item, index) in tags"
       :key="index"
       class="tag button2 left"
+      @click="handleClick(item)"
     >
       <i class="button2">
         {{ item }}
@@ -21,6 +21,11 @@ export default {
     tags: {
       default: () => [],
       type: Array,
+    },
+  },
+  methods: {
+    handleClick(cat) {
+      this.$router.push({ name: "playlists", query: { cat } });
     },
   },
 };

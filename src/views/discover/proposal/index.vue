@@ -43,6 +43,7 @@
 </template>
 
 <script>
+import login from "@/components/login/index.vue";
 import Swiper from "@/components/Swiper/index.vue";
 import playlists from "@/components/playlists/playlists.vue";
 import { tags, getHotPlaylist } from "@/api/request.js";
@@ -57,6 +58,7 @@ export default {
   components: {
     Swiper,
     playlists,
+    login,
   },
   methods: {
     handleClick(cat) {

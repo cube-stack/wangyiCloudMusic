@@ -3,7 +3,7 @@
     <div class="article">
       <!-- 分类搜索 -->
       <div class="header">
-        <h1 class="type">全部</h1>
+        <h1 class="type">{{ cat }}</h1>
         <button
           data-msk="false"
           class="button2 btn-right"

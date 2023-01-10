@@ -1,15 +1,18 @@
 <template>
   <div>
-    <router-view></router-view>
+    <router-view :key="key"></router-view>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'discover'
-}
+  name: "discover",
+  computed: {
+    key() {
+      return this.$route.query.key;
+    },
+  },
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

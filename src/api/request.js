@@ -1,9 +1,12 @@
 import axios from "axios";
-
+const Axios = axios.create({
+  baseURL: "http://localhost:8080/api/",
+  // headers: { cookie: "foobar" },
+});
 export const hot = (params) =>
-  axios({
+  Axios({
     method: "get",
-    url: "http://localhost:8080/api/playlist/hot",
+    url: "playlist/hot",
     params,
   });
 
@@ -11,9 +14,9 @@ export const hot = (params) =>
  * 获取列表
  */
 export const tags = (params) =>
-  axios({
+  Axios({
     method: "get",
-    url: "http://localhost:8080/api/playlist/highquality/tags",
+    url: "playlist/highquality/tags",
     params,
   });
 
@@ -21,9 +24,9 @@ export const tags = (params) =>
  * 获取热门歌单
  */
 export const getHotPlaylist = (params) =>
-  axios({
+  Axios({
     method: "get",
-    url: "http://localhost:8080/api/top/playlist",
+    url: "top/playlist",
     params,
   });
 
@@ -31,9 +34,9 @@ export const getHotPlaylist = (params) =>
  * 获取歌单详情
  */
 export const getPlaylistDetail = (params) =>
-  axios({
+  Axios({
     method: "get",
-    url: "http://localhost:8080/api/playlist/detail",
+    url: "playlist/detail",
     params,
   });
 
@@ -41,9 +44,9 @@ export const getPlaylistDetail = (params) =>
  * 获取音乐URL
  */
 export const getSongUrlV1 = (params) =>
-  axios({
+  Axios({
     method: "get",
-    url: "http://localhost:8080/api/song/url/v1",
+    url: "song/url/v1",
     params,
   });
 
@@ -51,9 +54,9 @@ export const getSongUrlV1 = (params) =>
  * 获取精彩评论
  */
 export const getCommentHot = (params) =>
-  axios({
+  Axios({
     method: "get",
-    url: "http://localhost:8080/api/comment/hot",
+    url: "comment/hot",
     params,
   });
 
@@ -61,9 +64,9 @@ export const getCommentHot = (params) =>
  * 获取评论
  */
 export const getCommentNew = (params) =>
-  axios({
+  Axios({
     method: "get",
-    url: "http://localhost:8080/api/comment/new",
+    url: "comment/new",
     params,
   });
 
@@ -71,9 +74,9 @@ export const getCommentNew = (params) =>
  * 获取歌曲详情
  */
 export const getSongDetail = (params) =>
-  axios({
+  Axios({
     method: "get",
-    url: "http://localhost:8080/api/song/detail",
+    url: "song/detail",
     params,
   });
 
@@ -81,9 +84,9 @@ export const getSongDetail = (params) =>
  * 获取歌词
  */
 export const getLyric = (params) =>
-  axios({
+  Axios({
     method: "get",
-    url: "http://localhost:8080/api//lyric",
+    url: "/lyric",
     params,
   });
 
@@ -91,9 +94,9 @@ export const getLyric = (params) =>
  * 获取所有歌单
  */
 export const getPlaylists = (params) =>
-  axios({
+  Axios({
     method: "get",
-    url: "http://localhost:8080/api/top/playlist",
+    url: "top/playlist",
     params,
   });
 
@@ -101,8 +104,38 @@ export const getPlaylists = (params) =>
  * 获取歌单分类
  */
 export const getCatlist = (params) =>
-  axios({
+  Axios({
     method: "get",
-    url: "http://localhost:8080/api/playlist/catlist",
+    url: "playlist/catlist",
+    params,
+  });
+
+/**
+ * 获取二维码生成key
+ */
+export const getLoginKey = (params) =>
+  Axios({
+    method: "get",
+    url: `login/qr/key?t=${new Date().getTime()}`,
+    params,
+  });
+
+/**
+ * 获取二维码生成接口
+ */
+export const getLoginQr = (params) =>
+  Axios({
+    method: "get",
+    url: `login/qr/create?t=${new Date().getTime()}`,
+    params,
+  });
+
+/**
+ * 获取二维码检验
+ */
+export const getLoginCheck = (params) =>
+  Axios({
+    method: "get",
+    url: `login/qr/check?t=${new Date().getTime()}`,
     params,
   });
