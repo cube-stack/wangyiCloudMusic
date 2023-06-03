@@ -3,6 +3,14 @@ const Axios = axios.create({
   baseURL: "http://localhost:8080/api/",
   // headers: { cookie: "foobar" },
 });
+Axios.interceptors.response.use(
+  function (response) {
+    return response.data;
+  },
+  function (error) {
+    return Promise.reject(error);
+  }
+);
 export const hot = (params) =>
   Axios({
     method: "get",
@@ -137,5 +145,25 @@ export const getLoginCheck = (params) =>
   Axios({
     method: "get",
     url: `login/qr/check?t=${new Date().getTime()}`,
+    params,
+  });
+
+/**
+ * 游客登录cookie
+ */
+export const register = (params) =>
+  Axios({
+    method: "get",
+    url: "/register/anonimous",
+    params,
+  });
+
+/**
+ * 游客登录状态
+ */
+export const getLoginStatus = (params) =>
+  Axios({
+    method: "get",
+    url: "/login/status",
     params,
   });

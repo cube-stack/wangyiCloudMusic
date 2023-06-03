@@ -16,7 +16,7 @@ export default new Vuex.Store({
       actions: {
         async palyMusic(context, id) {
           const url = await getSongUrlV1({ id, level: "exhigh" }).then(
-            (res) => res.data.data[0].url
+            (res) => res.data[0].url
           );
           console.log(url);
           context.commit("NextSong", url);

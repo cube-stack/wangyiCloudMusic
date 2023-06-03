@@ -15,7 +15,7 @@ export default {
   name: "playlists",
   props: {
     playlists: {
-      default: () => [{}],
+      default: () => [],
       type: Array,
     },
   },

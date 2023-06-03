@@ -73,8 +73,8 @@ export default {
     getSongDetail() {
       const params = { ids: this.id };
       getSongDetail(params).then((res) => {
-        const { al: coverDetail } = res.data.songs[0];
-        this.songDetail = res.data.songs[0];
+        const { al: coverDetail } = res.songs[0];
+        this.songDetail = res.songs[0];
         this.songDetail.coverDetail = coverDetail;
       });
     },

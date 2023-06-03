@@ -1,6 +1,11 @@
 <template>
   <div class="home">
-    <header-tab @login="handleLogin"></header-tab>
+    <header-tab
+      @login="handleLogin"
+      :loginStatus="loginStatus"
+      :avatarUrl="avatarUrl"
+    >
+    </header-tab>
     <router-view></router-view>
     <audio
       class="play"
@@ -9,12 +14,16 @@
       :src="url()"
       autoplay
     ></audio>
-    <login :visible.sync="loginVisible" v-if="loginVisible"></login>
+    <login
+      :visible.sync="loginVisible"
+      @handleLoginConfirm="handleLoginConfirm"
+    ></login>
   </div>
 </template>
 
 <script>
 import login from "@/components/login/index.vue";
+import { getLoginStatus } from "@/api/request.js";
 import { mapState } from "vuex";
 import HeaderTab from "@/components/HeaderTab/HeaderTab.vue";
 export default {
@@ -27,12 +36,23 @@ export default {
     return {
       ...mapState("currentSong", { url: "url" }),
       loginVisible: false,
+      loginStatus: false,
+      avatarUrl: "",
     };
   },
   methods: {
     handleLogin() {
       this.loginVisible = true;
     },
+    handleLoginConfirm() {
+      getLoginStatus().then((res) => {
+        this.loginStatus = res.data.code === 200;
+        this.avatarUrl = res.data.profile.avatarUrl || "";
+      });
+    },
+  },
+  created() {
+    this.handleLoginConfirm();
   },
 };
 </script>

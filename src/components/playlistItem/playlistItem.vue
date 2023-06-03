@@ -99,5 +99,11 @@ export default {
       font-size: 13px;
     }
   }
+  &:nth-child(5n + 4) {
+    margin-right: 0;
+  }
+  &:nth-child(5n) {
+    margin-left: 0;
+  }
 }
 </style>

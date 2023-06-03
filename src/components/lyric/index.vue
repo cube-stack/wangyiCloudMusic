@@ -67,7 +67,7 @@ export default {
         const {
           lrc: { lyric },
           tlyric: { lyric: tlyric },
-        } = res.data;
+        } = res;
         this.baseInfo.lrc = lyric;
         this.baseInfo.tlyric = tlyric;
       });

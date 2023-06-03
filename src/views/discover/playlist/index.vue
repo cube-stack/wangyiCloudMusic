@@ -83,7 +83,7 @@ export default {
         order: this.order,
       };
       getPlaylists(params).then((res) => {
-        const { playlists, total } = res.data;
+        const { playlists, total } = res;
         this.playlists = playlists;
         this.total = total;
         this.dialogVisible = false;
@@ -115,7 +115,7 @@ export default {
           { x: "0px", y: "-117px" },
           { x: "0px", y: "-141px" },
         ];
-        const { categories, sub } = res.data;
+        const { categories, sub } = res;
         Object.keys(categories).forEach((key, index) => {
           result[index] = {
             name: categories[key],

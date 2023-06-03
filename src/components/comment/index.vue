@@ -73,9 +73,7 @@ export default {
         type: this.type,
         limit: 10,
       };
-      getCommentHot(params).then(
-        (res) => (this.hotComments = res.data.hotComments)
-      );
+      getCommentHot(params).then((res) => (this.hotComments = res.hotComments));
     },
     //获得最新评论
     getCommentNew(currentPage = 1) {
@@ -89,7 +87,7 @@ export default {
         cursor: this.cursor,
       };
       getCommentNew(params).then((res) => {
-        const { comments, totalCount, cursor } = res.data.data;
+        const { comments, totalCount, cursor } = res.data;
         this.comments = comments;
         this.total = totalCount;
         this.cursor = cursor;

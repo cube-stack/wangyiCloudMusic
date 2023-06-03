@@ -44,7 +44,7 @@ export default {
   },
   created() {
     getPlaylistDetail({ id: this.id }).then((res) => {
-      this.playlistDetail = res.data.playlist;
+      this.playlistDetail = res.playlist;
     });
   },
 };

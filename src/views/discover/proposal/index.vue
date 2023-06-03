@@ -4,36 +4,9 @@
     <div class="article">
       <div class="mainContent">
         <!--热门推荐  -->
-        <div class="n-hot">
-          <div class="n-hot_title">
-            <a
-              href=""
-              style="font-size: 25px; margin-right: 20px; color: #333333"
-              >热门推荐</a
-            >
-            <div class="tags">
-              <a
-                @click="handleClick(item.name)"
-                v-for="(item, index) in tags"
-                :key="index"
-                >{{ item.name
-                }}<span class="line" v-if="!(tags.length - 1 === index)"
-                  >|</span
-                ></a
-              >
-            </div>
-            <div class="more">
-              <a @click="handleClick('全部')">更多</a>
-              <i>-></i>
-            </div>
-            <div class="under-line"></div>
-          </div>
-          <div class="playlists">
-            <playlists :playlists="playlists"> </playlists>
-          </div>
-        </div>
+        <hotRefer></hotRefer>
         <!-- 新碟上架 -->
-        <div class="n-new"></div>
+        <newRecord></newRecord>
         <!-- 榜单 -->
         <div class="n-bill"></div>
       </div>
@@ -44,37 +17,30 @@
 
 <script>
 import login from "@/components/login/index.vue";
-import Swiper from "@/components/Swiper/index.vue";
+// import Swiper from "@/components/Swiper/index.vue";
+import Swiper from "@/components/Swiper/swiper.vue";
 import playlists from "@/components/playlists/playlists.vue";
-import { tags, getHotPlaylist } from "@/api/request.js";
+import hotRefer from "@/views/discover/proposal/components/hotRefer/index.vue";
+import newRecord from "@/views/discover/proposal/components/newRecord/index.vue";
 export default {
   name: "proposal",
   data() {
     return {
       tags: [],
-      playlists: [{}],
+      playlists: [],
     };
   },
   components: {
     Swiper,
     playlists,
     login,
+    hotRefer,
+    newRecord,
   },
   methods: {
     handleClick(cat) {
       this.$router.push({ name: "playlists", query: { cat } });
     },
-  },
-  created() {
-    tags().then((res) => {
-      this.tags = res.data.tags.slice(0, 5);
-    });
-    const params = {
-      limit: 8,
-    };
-    getHotPlaylist(params).then((res) => {
-      this.playlists = res.data.playlists;
-    });
   },
 };
 </script>

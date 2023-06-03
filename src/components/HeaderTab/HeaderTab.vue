@@ -10,7 +10,9 @@
         >
           <span>{{ item.name }}</span>
         </div>
-        <div @click="handleLogin">登录</div>
+        <div @click="handleLogin" class="login" v-if="!loginStatus">登录</div>
+
+        <img :src="avatarUrl" alt="" class="photo" />
       </h2>
     </div>
   </div>
@@ -19,6 +21,16 @@
 <script>
 export default {
   name: "HeaderTab",
+  props: {
+    avatarUrl: {
+      default: "",
+      type: String,
+    },
+    loginStatus: {
+      default: false,
+      type: Boolean,
+    },
+  },
   data() {
     return {
       headerList: [
@@ -70,6 +82,24 @@ export default {
         background: #000000;
         color: #fff;
         cursor: pointer;
+      }
+      .photo {
+        width: 40px;
+        height: 40px;
+        border: 1px solid #000;
+        cursor: pointer;
+        border-radius: 20px;
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+    }
+    .login {
+      padding: 20px 20px;
+      color: #fff;
+      cursor: pointer;
+      &:hover {
+        background: #000;
       }
     }
   }

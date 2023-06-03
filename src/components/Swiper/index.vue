@@ -1,5 +1,5 @@
 <template>
-  <div class="coverBox">
+  <div class="coverBox" ref="box">
     <ul class="covers clearfix" ref="covers">
       <li class="cover" v-for="(item, index) in backgroundUrl" :key="index">
         <div
@@ -60,7 +60,8 @@ export default {
       this.currentCover++;
       if (this.currentCover > 4) this.currentCover = 0;
       if (covers && covers.style) {
-        covers.style.left = `-${this.currentCover * 1903}px`;
+        const width = this.$refs.box.offsetWidth;
+        covers.style.left = `-${this.currentCover * width}px`;
       }
     },
     changeCover() {

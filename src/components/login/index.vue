@@ -1,5 +1,5 @@
 <template>
-  <div class="mask">
+  <div class="mask" v-if="visible">
     <div class="dialog">
       <h2 class="header">
         登录
@@ -39,10 +39,10 @@ export default {
     getQRCode() {
       return new Promise((resolve, reject) => {
         getLoginKey().then((res) => {
-          this.key = res.data.data.unikey;
+          this.key = res.data.unikey;
           const params = { key: this.key, qrimg: true };
           getLoginQr(params).then((res) => {
-            this.img = res.data.data.qrimg;
+            this.img = res.data.qrimg;
             resolve();
           });
         });
@@ -53,8 +53,10 @@ export default {
         key: this.key,
       };
       getLoginCheck(params).then((res) => {
-        if (res.data.code === 803) {
+        if (res.code === 803) {
           clearInterval(this.timer);
+          this.$emit("handleLogin");
+          this.$emit("update:visible", false);
         }
       });
     },
@@ -62,14 +64,18 @@ export default {
       this.$emit("update:visible", false);
     },
   },
-  async created() {
-    await this.getQRCode();
-    this.timer = setInterval(() => {
-      this.getLoginCheck();
-    }, 1000);
-  },
-  beforeDestroy() {
-    clearInterval(this.timer);
+
+  watch: {
+    async visible(v) {
+      if (v) {
+        await this.getQRCode();
+        this.timer = setInterval(() => {
+          this.getLoginCheck();
+        }, 1000);
+      } else {
+        clearInterval(this.timer);
+      }
+    },
   },
 };
 </script>
