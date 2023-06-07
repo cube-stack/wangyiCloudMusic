@@ -10,9 +10,8 @@
         >
           <span>{{ item.name }}</span>
         </div>
-        <div @click="handleLogin" class="login" v-if="!loginStatus">登录</div>
-
-        <img :src="avatarUrl" alt="" class="photo" />
+        <div @click="handleLogin" class="login" v-if="!avatarUrl">登录</div>
+        <img :src="avatarUrl" alt="" class="photo" v-else />
       </h2>
     </div>
   </div>

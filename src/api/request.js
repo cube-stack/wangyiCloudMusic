@@ -1,7 +1,7 @@
 import axios from "axios";
 const Axios = axios.create({
   baseURL: "http://localhost:8080/api/",
-  // headers: { cookie: "foobar" },
+  withCredentials: true,
 });
 Axios.interceptors.response.use(
   function (response) {

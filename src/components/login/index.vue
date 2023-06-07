@@ -55,7 +55,7 @@ export default {
       getLoginCheck(params).then((res) => {
         if (res.code === 803) {
           clearInterval(this.timer);
-          this.$emit("handleLogin");
+          this.$emit("handleLoginConfirm");
           this.$emit("update:visible", false);
         }
       });
@@ -88,6 +88,7 @@ export default {
   background-color: rgba($color: #000000, $alpha: 0.5);
   width: 100vw;
   height: 100vh;
+  z-index: 9999;
   .dialog {
     position: absolute;
     top: 0;
